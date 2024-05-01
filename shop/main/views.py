@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from .models import Product,Category
+from django.shortcuts import render, get_object_or_404
+
 
 
 def index(request):
@@ -27,3 +29,7 @@ def search(request):
     else:
         products = Product.objects.all()
     return render(request, 'main/index.html', {'product': products})
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    return render(request, 'main/product_detail.html', {'product': product})

@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-2">
+            <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+        </div>
+        <div class="col-md-6">
+            <h1>{{ product.name }}</h1>
+            <p><strong>Цена:</strong> {{ product.price }}</p>
+            <p><strong>Цвет:</strong> {{ product.color }}</p>
+            <p><strong>Описание:</strong> {{ product.description }}</p>
+        </div>
+    </div>
+{% endblock %}

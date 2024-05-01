@@ -33,14 +33,14 @@
                     <div class="card custom-card">
                         <img src="{{ i.image.url }}" class="card-img-top custom-img" alt="{{ i.name }}">
                         <div class="card-body">
-                            <h5 class="card-title">{{ i.name }}</h5>
+                            <a href="{% url 'product_detail' i.id %}">{{ i.name }}</a>
                             <p class="card-text"><strong>Цена:</strong> {{ i.price }} тг</p>
                             <p class="card-text"><strong>Цвет:</strong> {{ i.color }}</p>
                         </div>
                     </div>
                 </div>
             {% endfor %}
-        </div>
+        </div>        
     </div>
     
 </div>
