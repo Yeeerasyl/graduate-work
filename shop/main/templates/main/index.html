@@ -1,0 +1,72 @@
+{%extends 'main/base.html' %}
+
+{%block tittle%}
+{{tittle}}
+{%endblock%}
+
+{%block content%}
+<div class="container">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-md-8"> <!-- Уменьшаем ширину блока и смещаем его влево -->
+                <form class="mb-3" onchange="this.submit()">
+                    <div class="input-group">
+                        <label for="sort" class="input-group-text">Сортировать по:</label>
+                        <select class="form-select" name="sort" id="sort" aria-label="Default select example">
+                            <option value="default" {% if selected_sort == 'default' %}selected{% endif %}>По умолчанию</option>
+                            <option value="price_asc" {% if selected_sort == 'price_asc' %}selected{% endif %}>От дешевого к дорогому</option>
+                            <option value="price_desc" {% if selected_sort == 'price_desc' %}selected{% endif %}>От дорогого к дешевому</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    <div class="container">
+        <div class="row">
+            {% for i in product %}
+                <div class="col-4 mb-4">
+                    <div class="card custom-card">
+                        <img src="{{ i.image.url }}" class="card-img-top custom-img" alt="{{ i.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ i.name }}</h5>
+                            <p class="card-text"><strong>Цена:</strong> {{ i.price }} тг</p>
+                            <p class="card-text"><strong>Цвет:</strong> {{ i.color }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+</div>
+{%endblock%}
+
+{%block footer%} 
+<footer class="py-4 bg-dark"> 
+    <div class="container">
+        <p class="m-0 text-center text-white">Internet shop &copy; Yerasyl</p>
+    </div>
+</footer>
+
+<style>
+    .custom-card {
+        width: 240px; 
+        height: 335px;
+        margin-bottom: 5px; 
+        
+    }
+
+    .card-img-top {
+       
+        max-height: 165px;
+        object-fit: contain;
+    }
+
+    
+</style>
+{%endblock%}
