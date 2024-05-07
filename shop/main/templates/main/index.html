@@ -7,6 +7,15 @@
 {%block content%}
 <div class="container">
 
+    
+    
+    <script>
+        document.getElementById('file_upload').addEventListener('change', function() {
+            document.getElementById('uploadForm').submit();
+        });
+    </script>
+    
+
     <div class="container">
         <div class="row">
             <div class="col-md-4 offset-md-8"> <!-- Уменьшаем ширину блока и смещаем его влево -->

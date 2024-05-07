@@ -4,7 +4,7 @@ import re
 
 model = YOLO("best.pt")
 
-im1 = cv2.imread("qqq.jpg")
+im1 = cv2.imread("photo.jpg")
 results = model.predict(source=im1)
 
 final_result = results[0].verbose()
