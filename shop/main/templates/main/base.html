@@ -30,6 +30,11 @@
                 </label>
                 <input type="file" id="file_upload" name="file_upload" style="display: none;">
             </form>
+            <script>
+                document.getElementById('file_upload').addEventListener('change', function() {
+                    document.getElementById('uploadForm').submit();
+                });
+            </script>
             
             <form class="d-flex" role="search" action="{% url 'search' %}" method="GET">
                

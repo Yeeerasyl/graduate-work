@@ -36,8 +36,8 @@ def index(request):
         handle_uploaded_file(request.FILES['file_upload'])
         image_path = f"uploads/{request.FILES['file_upload'].name}"
         prediction = process_image(image_path)
-        print(prediction)  
-
+        print(prediction) 
+        products = products.filter(category__name=prediction)
     return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'product': products, 'selected_sort': selected_sort})
 
 def about(request):
