@@ -6,6 +6,9 @@ from ultralytics import YOLO
 import cv2
 import re
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
+
 model = YOLO("C:\\Users\\yeras\\OneDrive\\Документы\\GitHub\\graduate-work\\shop\\main\\best.pt")
 
 def handle_uploaded_file(f):
@@ -38,7 +41,20 @@ def index(request):
         prediction = process_image(image_path)
         print(prediction) 
         products = products.filter(category__name=prediction)
-    return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'product': products, 'selected_sort': selected_sort})
+    
+    paginator = Paginator(products, 12)  # Показывать 12 товаров на каждой странице
+
+    page_number = request.GET.get('page')
+    try:
+        products = paginator.page(page_number)
+    except PageNotAnInteger:
+        # Если параметр page не является целым числом, отображаем первую страницу
+        products = paginator.page(1)
+    except EmptyPage:
+        # Если страница вне диапазона (например, пустая страница), отображаем последнюю страницу
+        products = paginator.page(paginator.num_pages)
+
+    return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'products': products, 'selected_sort': selected_sort})
 
 def about(request):
     return render(request,'main/about.html')
