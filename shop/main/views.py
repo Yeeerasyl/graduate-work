@@ -38,9 +38,11 @@ def index(request):
     if request.method == 'POST' and request.FILES.get('file_upload'):
         handle_uploaded_file(request.FILES['file_upload'])
         image_path = f"uploads/{request.FILES['file_upload'].name}"
-        prediction = process_image(image_path)
+        prediction = process_image(image_path).strip()
+
         print(prediction) 
-        products = products.filter(category__name=prediction)
+        products = Product.objects.filter(category__name__iexact=prediction)
+
     
     paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
