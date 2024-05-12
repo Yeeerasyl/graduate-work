@@ -42,16 +42,13 @@ def index(request):
         print(prediction) 
         products = products.filter(category__name=prediction)
     
-    paginator = Paginator(products, 12)  # Показывать 12 товаров на каждой странице
-
+    paginator = Paginator(products, 12)
     page_number = request.GET.get('page')
     try:
         products = paginator.page(page_number)
     except PageNotAnInteger:
-        # Если параметр page не является целым числом, отображаем первую страницу
         products = paginator.page(1)
     except EmptyPage:
-        # Если страница вне диапазона (например, пустая страница), отображаем последнюю страницу
         products = paginator.page(paginator.num_pages)
 
     return render(request, 'main/index.html', {'title': 'Главная страница сайта', 'products': products, 'selected_sort': selected_sort})
@@ -68,7 +65,8 @@ def search(request):
         products = Product.objects.filter(name__icontains=query)
     else:
         products = Product.objects.all()
-    return render(request, 'main/index.html', {'product': products})
+    return render(request, 'main/index.html', {'products': products})
+
 
 def product_detail(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
